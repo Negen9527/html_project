@@ -16,7 +16,13 @@
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
-
+	<style type="text/css">
+	.swal-modal{
+		width:260px;
+		height:250px;
+		
+	}
+	</style>
 </head>
 
 <body class="gray-bg">
@@ -30,7 +36,7 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form role="form" method="post" action="../MusicServlet?action=addMusic">
+                                <form role="form" method="post" action="">
 									<div class="form-group">
 									<label class="control-label">选择标签：</label>
 									     <select class="form-control" name="labelName" id="labelName" placeholder="请选择标签" style="font-size:12px;">
@@ -38,19 +44,19 @@
 									    </select>
 									</div>
                                     <div class="form-group">
-                                        <input type="text" placeholder="请输入歌曲名" class="form-control" name=songName>
+                                        <input type="text" placeholder="请输入歌曲名" class="form-control" name="songName" id="songName">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" placeholder="请输入歌手名" class="form-control" name="singerName">
+                                        <input type="text" placeholder="请输入歌手名" class="form-control" name="singerName" id="singerName">
                                     </div>
                                     
                                     <div>
-                                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"
+                                        <button id="saveBtn" class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button"
                                                 style="margin-right: 170px;"><strong>保&nbsp;&nbsp;&nbsp;&nbsp;
                                         存</strong>
                                         </button>
 
-                                        <button class="btn btn-sm btn-info pull-right m-t-n-xs" type="button"
+                                        <button id="reset" onclick="reset()" class="btn btn-sm btn-info pull-right m-t-n-xs" type="button"
                                                 style="margin-right: 170px;"><strong>重&nbsp;&nbsp;&nbsp;&nbsp;
                                         置</strong>
                                         </button>
@@ -93,7 +99,7 @@
 			var len = data.length
 			
  			for(var i=len-1; i>0; i--){
- 				console.log(data[i])
+ 				//console.log(data[i])
 				$("#labelName").append("<option value='"+data[i][0]+"'>"+data[i][0]+"</option>");
 				
 			} 
@@ -101,10 +107,55 @@
 		}
 	});
 	
+	
+$(document).ready(function(){
+	$("#saveBtn").click(function(){
+		var labelName = $("#labelName").val();
+		var songName = $("#songName").val();
+		var singerName = $("#singerName").val();
+		if(songName == "")swal("", "请输入歌曲名","warning");
+		if(singerName == "")swal("", "请输入歌手名","warning");
+		
+		$.ajax({
+			type:"get",
+			url:"../MusicServlet?action=addMusic",
+			data:{
+				"labelName": labelName,
+				"songName": songName,
+				"singerName": singerName
+			},
+			success:function(msg){
+				console.log(msg == "success")
+				if(msg == "success"){
+					swal("", "添加成功","success")
+					reset()
+				}else{
+					swal("", "添加失败","error")
+				}
+			},
+			error:function(msg){
+				swal("", "服务器错误","error")
+			}
+		});
+		
+		
+		
+		
+		
+		
+	});
+	
+})
+
+function reset(){
+	$("#songName").val("");
+	$("#singerName").val("");
+}
+	
 </script>
 
 
 
 </body>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </html>

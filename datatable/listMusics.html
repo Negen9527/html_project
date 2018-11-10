@@ -6,7 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <title> - 数据表格</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -69,7 +68,7 @@
             <div class="col-sm-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>基本 <small>分类，查找</small></h5>
+                        <h5>歌曲管理</small></h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -99,7 +98,7 @@
 							
 						</div>
                         <table class="table table-striped table-bordered table-hover dataTables-example"
-                        id="editable">
+                        id="editable" style="text-align:center">
                             <thead>
                                 <tr>
                                 	<th>id</th>
@@ -162,6 +161,7 @@
     	var oldSongName = "";
     	var oldSingerName = "";
     	var labels = new Array();
+    	var index = -1
     
         $(document).ready(function () {
         	//加载标签数据
@@ -177,7 +177,7 @@
          				//console.log(data[i])
         				$("#labelName").append("<option value='"+data[i][0]+"'>"+data[i][0]+"</option>");
          			} 
-                	console.log(labels)
+                	//console.log(labels)
         			//初始化table
                 	loadData(data[len-1][0])
         			
@@ -189,7 +189,7 @@
             //下拉框改变事件
             $("#labelName").change(function(){
             	var selected=$(this).children('option:selected').val()
-            	console.log(selected)
+            	//console.log(selected)
             	loadData(selected)
             });
             
@@ -201,36 +201,45 @@
 				newSongName = $("#songName").val();
 				newSingerName = $("#singerName").val();
 				if(newLabelName != oldLabelName || newSongName != oldSongName || newSingerName != oldSingerName){
-					postData = {
-							"id":oldId,
-							"newLabelName":newLabelName,
-							"newSongName":newSongName,
-							"newSingerName":newSingerName
+					if(newSongName == ""){
+						swal("请输入歌曲名", "出错了！","error");
 					}
-					$.ajax({
-						type:"get",
-						url:"../MusicServlet?action=modifyMusic",
-						data:postData,
-						success:function(msg){
-							$("#modify-modal").modal("hide")
-		    				if(msg=="success"){
-		    					//删除成功
-		    		    	    swal(
-		    	    		    	      '修改成功',
-		    	    		    	      '',
-		    	    		    	      'success'
-		    	    		    	    );
-		    	    		    $("table#editable").find("tr").eq(row).find("td").eq(1).val("newLableName");
-		    	    		    $("table#editable").find("tr").eq(row).find("td").eq(2).val("newSongName");
-		    	    		    $("table#editable").find("tr").eq(row).find("td").eq(3).val("newSingerName");
-		    		    	    
-		    					}
-		    				
-						},
-						error:function(msg){
-							
+					if(newSingerName == ""){
+						swal("请输入歌手名", "出错了！","error");
+					}
+					if(newSongName != "" && newSingerName != ""){
+						postData = {
+								"id":oldId,
+								"newLabelName":newLabelName,
+								"newSongName":newSongName,
+								"newSingerName":newSingerName
 						}
-					});
+						$.ajax({
+							type:"get",
+							url:"../MusicServlet?action=modifyMusic",
+							data:postData,
+							success:function(msg){
+								$("#modify-modal").modal("hide")
+			    				if(msg=="success"){
+
+			    					//删除成功
+			    		    	    swal(
+			    	    		    	      '修改成功',
+			    	    		    	      '',
+			    	    		    	      'success'
+			    	    		    	    );
+			    					}
+								//console.log(index)
+		    	    		    $("table#editable").find("tr").eq(index).find("td").eq(1).text(newLabelName);
+		    	    		    $("table#editable").find("tr").eq(index).find("td").eq(2).text(newSongName);
+		    	    		    $("table#editable").find("tr").eq(index).find("td").eq(3).text(newSingerName);
+			    				
+							},
+							error:function(msg){
+								
+							}
+						});
+					}
 					
 					
 					
@@ -257,7 +266,7 @@ function loadData(_labelName){
     	textType:"json",
     	url:"../MusicServlet?action=musics&labelName=" + _labelName,
     	success:function(data){
-    		console.log(data)
+    		//console.log(data)
     		data = JSON.parse(data)
     		$("#editable").dataTable().fnClearTable()
     		$("#editable").dataTable().fnDestroy()
@@ -268,8 +277,8 @@ function loadData(_labelName){
                         // return后边是我们希望在指定列填入的按钮代码
                         "targets": -1,
                         "render": function ( data, type, full, meta ) {
-                        	retStr = "<button id = 'deleteBtn' value = '删除' class='btn btn-w-m btn-danger'>删除</button>&nbsp;&nbsp;"
-                        			+"<button id = 'modifyBtn' value = '修改' class='btn btn-w-m btn-info'>修改</button>"
+                        	retStr = "<button id = 'deleteBtn' value = '删除' style='margin-bottom: 0px;' class='btn btn-w-s btn-danger'><i class='fa fa-remove'></i>&nbsp;&nbsp;<span class='bold'>删除</span></button>&nbsp;&nbsp;"
+                        			+"<button id = 'modifyBtn' value = '修改' class='btn btn-w-s btn-info'><i class='fa fa-edit'></i>&nbsp;&nbsp;<span class='bold'>修改</span></button>"
                             return retStr
                         }
                     }
@@ -308,7 +317,7 @@ function loadData(_labelName){
     		    	  if (isConfirm === true) {
     		    		$.ajax({
     		    			url:'../MusicServlet?action=deleteMusic',
-    		    			data:{"id":id,"labelName":labelName},
+    		    			data:{"id":id,"labelName":_labelName},
     		    			success:function(msg){
     		    				if(msg=="success"){
     		    					//删除成功
@@ -351,6 +360,7 @@ function loadData(_labelName){
     		$("#editable tbody").on("click", "#modifyBtn", function () {
     		    //获取行
     		    var row = $("table#editable tr").index($(this).closest("tr"));
+    		    index = row
     		    //获取某列（从0列开始计数）的值
     		    oldId = $("table#editable").find("tr").eq(row).find("td").eq(0).text();
     		    oldLabelName = $("table#editable").find("tr").eq(row).find("td").eq(1).text();
