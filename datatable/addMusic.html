@@ -125,12 +125,13 @@ $(document).ready(function(){
 				"singerName": singerName
 			},
 			success:function(msg){
-				console.log(msg == "success")
 				if(msg == "success"){
 					swal("", "添加成功","success")
 					reset()
-				}else{
+				}else if(msg == "error"){
 					swal("", "添加失败","error")
+				}else if(msg == "exist"){
+					swal("", "歌曲已存在","warning")
 				}
 			},
 			error:function(msg){

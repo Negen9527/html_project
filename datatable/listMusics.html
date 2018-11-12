@@ -19,6 +19,9 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=4.1.0" rel="stylesheet">
 
+	<link href="css/sweetalert2.min.css" rel="stylesheet">
+	<script src="js/sweetalert2.js" type="text/javascript"></script>
+
 	<style type="text/css">
 		.float-e-margins .btn{
 			margin-bottom:0px;
@@ -228,11 +231,12 @@
 			    	    		    	      '',
 			    	    		    	      'success'
 			    	    		    	    );
+			    	    		    $("table#editable").find("tr").eq(index).find("td").eq(1).text(newLabelName);
+			    	    		    $("table#editable").find("tr").eq(index).find("td").eq(2).text(newSongName);
+			    	    		    $("table#editable").find("tr").eq(index).find("td").eq(3).text(newSingerName);
 			    					}
-								//console.log(index)
-		    	    		    $("table#editable").find("tr").eq(index).find("td").eq(1).text(newLabelName);
-		    	    		    $("table#editable").find("tr").eq(index).find("td").eq(2).text(newSongName);
-		    	    		    $("table#editable").find("tr").eq(index).find("td").eq(3).text(newSingerName);
+								if(msg == "exist")swal("修改失败", "歌曲已存在","warning")
+								if(msg == "error")swal("", "添加失败","error")
 			    				
 							},
 							error:function(msg){
@@ -305,14 +309,35 @@ function loadData(_labelName){
     		    var _labelName = $("table#editable").find("tr").eq(row).find("td").eq(1).text();
     		    var songName = $("table#editable").find("tr").eq(row).find("td").eq(2).text();
     		    var singerName = $("table#editable").find("tr").eq(row).find("td").eq(3).text();
-    		    
+    		    swal({
+    		    	  title: "Are you sure?",
+    		    	  text: "Once deleted, you will not be able to recover this imaginary file!",
+    		    	  icon: "warning",
+    		    	  buttons: true,
+    		    	  dangerMode: true,
+    		    	})
+    		    	.then((willDelete) => {
+    		    	  if (willDelete) {
+    		    	    swal("Poof! Your imaginary file has been deleted!", {
+    		    	      icon: "success",
+    		    	    });
+    		    	  } else {
+    		    	    swal("Your imaginary file is safe!");
+    		    	  }
+    		    	});
     		    swal({
     		    	  title: '确认删除',
     		    	  text: '删除后不可恢复',
     		    	  type: 'warning',
     		    	  showCancelButton: true,
     		    	  confirmButtonText: '确定',
-    		    	  cancelButtonText: '取消',
+    		    	  cancel: {
+    		    		    text: "Cancel",
+    		    		    value: null,
+    		    		    visible: false,
+    		    		    className: "",
+    		    		    closeModal: true,
+    		    		  },
     		    	}).then(function(isConfirm) {
     		    	  if (isConfirm === true) {
     		    		$.ajax({
@@ -384,12 +409,13 @@ function loadData(_labelName){
         
         
 </script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 <!-- <script src="https://cdn.bootcss.com/limonte-sweetalert2/7.28.11/sweetalert2.all.min.js"></script>
-<link href="https://cdn.bootcss.com/limonte-sweetalert2/7.28.11/sweetalert2.css" rel="stylesheet">  -->    
-    
-    
-    
+<link href="https://cdn.bootcss.com/limonte-sweetalert2/7.28.11/sweetalert2.css" rel="stylesheet">   -->
+  
+<!-- <script type="text/javascript" src="sweetalert/sweetalert.js"></script> -->
     
 
 
