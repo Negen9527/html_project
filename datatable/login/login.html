@@ -1,119 +1,125 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
+<!DOCTYPE HTML>
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<title>登陆</title>
-	<meta name="keywords" content="" />
-	<meta name="description" content="" /> 
+<title>Purple_loginform Website Template | Home :: w3layouts</title>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	
 	<link href="../css/sweetalert2.min.css" rel="stylesheet">
 	<script src="../js/sweetalert2.js" type="text/javascript"></script>
-	
+<!-- -->
+
+
+<style type="text/css">
+	#loginBtn{
+	float: left;
+
+color: #fff;
+
+cursor: pointer;
+
+font-weight: 900;
+
+outline: none;
+
+font-family: 'Raleway', sans-serif;
+
+padding: 12px 0px;
+
+width: 35%;
+
+font-size: 18px;
+
+background: #6C496F;
+
+border: 2px solid #6C496F;
+
+border-radius: 0.5em;
+
+-webkit-border-radius: 0.5em;
+
+-moz-border-radius: 0.5em;
+
+-o-border-radius: 0.5em;
+	}
+
+</style>
+<script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
+<script src="js/jquery.min.js"></script>
+<script>$(document).ready(function(c) {
+	$('.alert-close').on('click', function(c){
+		$('.message').fadeOut('slow', function(c){
+	  		$('.message').remove();
+		});
+	});	  
+});
+</script>
 </head>
-
 <body>
-
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form class="login100-form">
-					<span class="login100-form-title p-b-49">登录</span>
-
- 					<div class="wrap-input100 validate-input m-b-23" data-validate="请输入用户名"> 
-						<span class="label-input100">用户名</span>
-						<input class="input100" type="text" name="userName" id="name" placeholder="请输入用户名" autocomplete="off">
- 						<span class="focus-input100" data-symbol="&#xf206;"></span>
-					</div> 
-
- 					<div class="wrap-input100 validate-input" data-validate="请输入密码"> 
-						<span class="label-input100">密码</span>
-						<input class="input100" type="password" name="pass" id="password" placeholder="请输入密码">
-						<span class="focus-input100" data-symbol="&#xf190;"></span>
- 					</div> 
-
-					<div class="text-right p-t-8 p-b-31">
-						<!-- <a href="javascript:">忘记密码？</a> -->
-					</div>
-
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" id="loginBtn">登 录</button>
-						</div>
-					</div>
-
-<!-- 					<div class="txt1 text-center p-t-54 p-b-20">
-						<span>第三方登录</span>
-					</div>
-
-					<div class="flex-c-m">
-						<a href="#" class="login100-social-item bg1">
-							<i class="fa fa-wechat"></i>
-						</a>
-
-						<a href="#" class="login100-social-item bg2">
-							<i class="fa fa-qq"></i>
-						</a>
-
-						<a href="#" class="login100-social-item bg3">
-							<i class="fa fa-weibo"></i>
-						</a>
-					</div>
-
-					<div class="flex-col-c p-t-25">
-						<a href="javascript:" class="txt2">立即注册</a>
-					</div> -->
-				</form>
-			</div>
-		</div>
+<!-- contact-form -->	
+<div class="message warning">
+<div class="inset">
+	<div class="login-head">
+		<h1>Login Form</h1>
+		 <div class="alert-close"> </div> 			
 	</div>
-
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-
-</body>
+		<form>
+			<li>
+				<input type="text" class="text" id="name" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
+			</li>
+				<div class="clear"> </div>
+			<li>
+				<input type="password" value="Password" id="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
+			</li>
+			<div class="clear"> </div>
+			<div class="submit">
+				<input type="button" onclick="" id="loginBtn" value="Sign in" >
+				<h4><!-- <a href="#">Lost your Password ?</a> --></h4>
+						  <div class="clear">  </div>	
+			</div>
+				
+		</form>
+		</div>					
+	</div>
+	</div>
+	<div class="clear"> </div>
+<!--- footer --->
+<div class="footer">
+	<p>Copyright &copy; 2018.</p>
+</div>
 
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#loginBtn").click(function(){
-		var userName = $("#name").val()
-		var password = $("#password").val()
-		if(userName == "")swal("", "请输入账号","warning");
-		if(password == "")swal("", "请输入密码","warning");
-		if(userName != "" && password != ""){
-			$.ajax({
-				url:"../../LoginServelt?action=login",
-				type:"post",
-				data:{"userName":userName,"password":password},
-				success:function(msg){
-					if(msg=="success"){
-						window.location.href="../html/index.html"
-					}else{
-						swal("", "登陆失败","error");
-					}
-				},
-				error:function(){
-					swal("", "服务器异常","error");
+
+$("#loginBtn").click(function(){
+	var userName = $("#name").val()
+	var password = $("#password").val()
+	console.log(password)
+	if(userName == "" || userName=="Username")swal("", "请输入账号","warning");
+	if(password == "" || password=="Password")swal("", "请输入密码","warning");
+	if(userName != "" && password != "" && userName!="Username" && password!="Password"){
+		$.ajax({
+			url:"../../LoginServlet",
+			type:"post",
+			data:{"userName":userName,"password":password},
+			success:function(msg){
+				if(msg=="success"){
+					window.location.href="../../html/index.html"
+				}else{
+					swal("", "登陆失败","error");
 				}
-			})
-		}
-		
-		
-	});
-	
+			},
+			error:function(){
+				swal("", "服务器异常","error");
+			}
+		})
+	}
 	
 	
 });
-
 </script>
 
+</body>
 
 </html>
